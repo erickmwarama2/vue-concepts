@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+        <title> Vue Basics </title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="app.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <h1> Vue course goals </h1>
+        </header>
+        <section id="component">
+            <friend-contact></friend-contact>
+            <friend-contact></friend-contact>
+        </section>
+        <section id="how-vue-works">
+            <h2> How Vue works </h2>
+            <input type="text" ref="userText" />
+            <button @click="setText"> Set Text </button>
+            <p v-if="message">
+                {{ message }}
+            </p>
+            <p v-else>
+                No message
+            </p>
+        </section>
+        <section id="user-goal">
+            <h2> My Course Goal </h2>
+            <input type="text" v-model="enteredGoalValue"/>
+            <button @click="addGoal()"> Add Goal </button>
+            <p v-if="goals.length === 0">No goals have been added yet </p>
+            <ul v-else>
+                <li v-bind:key="goal" v-for="(goal, index) in goals" @click="removeGoal(index)">
+                    <p>{{ index + 1}} - {{ goal }}</p>
+                    <input type="text" @click.stop />
+                 </li>
+            </ul>
+            <!-- <p v-html="outputGoal()"></p> -->
+            <!-- <p>
+                {{ outputGoal() }}
+            </p>
+            <p>
+                Learn more <a v-bind:href="vueLink">about Vue</a>
+            </p> -->
+        </section>
+        <section id="two-way-binding">
+            <h2> Advanced Reactivity </h2>
+            <input type="text" v-model="userName" />
+            <br/>
+            <input type="text" v-model="lastName" />
+            <p> Your Name: {{ fullName }} </p>
+        </section>
+        <section id="events">
+            <h2> Events in Action </h2>
+            <button v-on:click="add(5)"> Add 5 </button>
+            <button v-on:click="remove(5)"> Subtract 5 </button>
+            <p v-once> Starting Counter: {{ counter }} </p>
+            <p> Result: {{ counter }}</p>
+            <h2> Input events </h2>
+            <input type="text" v-on:input="setName($event, 'Sir')" />
+            <p> Your Name: {{ name }} </p>
+            <form v-on:submit.prevent="submitForm">
+                <input type="text">
+                <button> Sign Up </button>
+            </form>
+        </section>
+    </body>
+</html>
